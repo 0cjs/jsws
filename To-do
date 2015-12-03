@@ -1,0 +1,24 @@
+To-do
+-----
+
+* Web server to serve static files
+    * mime types from file extensions
+* Use Host: header to serve multiple sites
+* Split formatting (HTML/CSS) from content
+    * static generation of web pages a la Jekyll
+    * code we can re-use in a dynamic context as well
+    * multiple-language content
+* Language for input forms
+    * data storage (files? SQLite?)
+    * output rendering of stored data
+
+Principles
+----------
+
+* Two basic sources of data:
+    * From developers (including non-dev staff): can go in Git
+    * From users of site (needs to go in to locally updated storage, generally)
+    * Think of a blog: entries from developers, comments from wide world
+* Content vs. formatting
+    * content might be in multiple languages, but uses same formatting
+* Multi-language
