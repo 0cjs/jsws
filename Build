@@ -6,4 +6,28 @@ trap '
 
 err() { echo 1>&2 "$@"; exit 1; }
 
+start_test_server() {
+    local port="$1"
+    ({  cat src/test/http-header-200
+        cat src/test/docroot/test.txt
+    } | nc >/dev/null -l 127.0.0.1 $port
+    ) &
+}
+
+assert_equal() {
+    local expected="$1"
+    local actual="$2"
+    [ "$expected" = "$actual" ] || {
+        err "assert_equal failure.
+Expected: $expected
+  Actual: $actual
+"
+    }
+}
+
+test_listen_port=12345
+start_test_server $test_listen_port
+actual="$(curl -S -s http://127.0.0.1:$test_listen_port/test.txt)"
+assert_equal Hello. "$actual"
+
 success=ok
