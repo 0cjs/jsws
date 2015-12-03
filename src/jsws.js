@@ -8,6 +8,11 @@ if (!(listen_port > 0)) {
     process.exit(1);
 }
 
+process.on('SIGTERM', function() {
+    // XXX record our termination in the error log
+    process.exit(1);
+});
+
 http.createServer(function (req, res) {
     res.writeHead(200)
     res.end("Hello.\n")

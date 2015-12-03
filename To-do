@@ -3,6 +3,7 @@ To-do
 
 * Web server to serve static files
     * mime types from file extensions
+    * write a PID file
 * Use Host: header to serve multiple sites
 * Split formatting (HTML/CSS) from content
     * static generation of web pages a la Jekyll
