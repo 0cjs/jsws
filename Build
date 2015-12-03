@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 trap '
+    [ -n "$test_server_pid" ] && kill "$test_server_pid"
     [ ok = "$success" ] || err FAILED.
 ' 0
 
@@ -8,10 +9,11 @@ err() { echo 1>&2 "$@"; exit 1; }
 
 start_test_server() {
     local port="$1"
-    ({  cat src/test/http-header-200
-        cat src/test/docroot/test.txt
-    } | nc >/dev/null -l 127.0.0.1 $port
-    ) &
+    node src/jsws.js "$port" &
+    # XXX The server should properly daemonize and return only when it's
+    # able to set requests. Quick wait hack here until we get that working.
+    sleep 0.3
+    test_server_pid=$?
 }
 
 assert_equal() {
@@ -25,9 +27,10 @@ Expected: $expected
     }
 }
 
+assert_equal v5. "$(node --version | cut -c 1-3)"
 test_listen_port=12345
 start_test_server $test_listen_port
-actual="$(curl -S -s http://127.0.0.1:$test_listen_port/test.txt)"
+actual="$(curl -S -s http://127.0.0.1:$test_listen_port/test.txtXXX)"
 assert_equal Hello. "$actual"
 
 success=ok
