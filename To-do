@@ -2,6 +2,7 @@ To-do
 -----
 
 * Web server to serve static files
+    * http://docs.nodejitsu.com/articles/HTTP/servers/how-to-serve-static-files
     * mime types from file extensions
     * write a PID file
 * Use Host: header to serve multiple sites
