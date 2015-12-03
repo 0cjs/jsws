@@ -1,0 +1,17 @@
+{
+  "name": "jsws",
+  "version": "0.0.1",
+  "description": "Experiments with a JavaScript web server.",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "Build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com.:cjs-cynic-net/jsws.git"
+  },
+  "author": "cjs",
+  "license": "MIT"
+}
